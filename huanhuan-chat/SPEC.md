@@ -37,6 +37,7 @@ conda create -n huanhuan python=3.12 -y
 conda activate huanhuan
 pip install -r requirements.txt
 
+# the model will be downloaded to ~/.cache/modelscope/hub/LLM-Research/
 modelscope download --model LLM-Research/Meta-Llama-3-8B-Instruct
 ```
 
