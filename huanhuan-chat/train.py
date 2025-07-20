@@ -3,6 +3,7 @@ import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, DataCollatorForSeq2Seq, TrainingArguments, Trainer, GenerationConfig
 from peft import LoraConfig, TaskType, get_peft_model
+from modelscope import snapshot_download
 
 
 def process_func(example):
@@ -24,9 +25,9 @@ def process_func(example):
     }
 
 def train():
-    model = AutoModelForCausalLM.from_pretrained('./LLM-Research/Meta-Llama-3___1-8B-Instruct', device_map="auto",torch_dtype=torch.bfloat16)
+    model = AutoModelForCausalLM.from_pretrained('meta-llama/Llama-3.1-8B-Instruct', device_map="auto",torch_dtype=torch.bfloat16)
     model.enable_input_require_grads() # 开启梯度检查点时，要执行该方法
-    tokenizer = AutoTokenizer.from_pretrained('./LLM-Research/Meta-Llama-3___1-8B-Instruct', use_fast=False, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained('meta-llama/Llama-3.1-8B-Instruct', use_fast=False, trust_remote_code=True)
     tokenizer.pad_token = tokenizer.eos_token
 
     # 将JSON文件转换为CSV文件
@@ -67,6 +68,22 @@ def train():
 
 
 if __name__ == "__main__":
+    # test env
+    print(torch.cuda.is_available())
+    print(torch.cuda.get_device_name(0))
+    print(torch.cuda.get_device_capability(0))
+    print(torch.cuda.get_device_properties(0))
+    print(torch.cuda.get_device_properties(0).total_memory)
+    print(torch.cuda.get_device_properties(0).total_memory / 1024 / 1024 / 1024)
+    print(torch.cuda.get_device_properties(0).total_memory / 1024 / 1024 / 1024 / 1024)
+    # gpu available?
+    if torch.cuda.is_available():
+        print("GPU is available")
+    else:
+        print("GPU is not available")
+        
+    model_dir = snapshot_download('LLM-Research/Meta-Llama-3.1-8B-Instruct')
+
     train()
 
 
