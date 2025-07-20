@@ -37,8 +37,7 @@ conda create -n huanhuan python=3.12 -y
 conda activate huanhuan
 pip install -r requirements.txt
 
-modelscope download --model LLM-Research/Meta-Llama-3-8B-Instruct README.md --local_dir ./pretrained_model
-
+modelscope download --model LLM-Research/Meta-Llama-3-8B-Instruct
 ```
 
 ## install pytorch

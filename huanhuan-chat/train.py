@@ -3,8 +3,7 @@ import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, DataCollatorForSeq2Seq, TrainingArguments, Trainer, GenerationConfig
 from peft import LoraConfig, TaskType, get_peft_model
-from modelscope import snapshot_download
-
+import os
 
 def process_func(example):
     MAX_LENGTH = 384    # Llama分词器会将一个中文字切分为多个token，因此需要放开一些最大长度，保证数据的完整性
@@ -25,9 +24,17 @@ def process_func(example):
     }
 
 def train():
-    model = AutoModelForCausalLM.from_pretrained('meta-llama/Llama-3.1-8B-Instruct', device_map="auto",torch_dtype=torch.bfloat16)
+    # 1. Define the model identifier used by ModelScope
+    # This should match the name you used in the 'modelscope download' command.
+    model_id = "LLM-Research/Meta-Llama-3___1-8B-Instruct"
+
+    # 2. Construct the full path to the model in the default ModelScope cache
+    # os.path.expanduser('~') correctly resolves the '~' to your home directory.
+    model_path = os.path.join(os.path.expanduser('~'), '.cache', 'modelscope', 'hub', model_id)
+
+    model = AutoModelForCausalLM.from_pretrained(model_path, device_map="auto",torch_dtype=torch.bfloat16)
     model.enable_input_require_grads() # 开启梯度检查点时，要执行该方法
-    tokenizer = AutoTokenizer.from_pretrained('meta-llama/Llama-3.1-8B-Instruct', use_fast=False, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=False, trust_remote_code=True)
     tokenizer.pad_token = tokenizer.eos_token
 
     # 将JSON文件转换为CSV文件
@@ -81,21 +88,4 @@ if __name__ == "__main__":
         print("GPU is available")
     else:
         print("GPU is not available")
-        
-    model_dir = snapshot_download('LLM-Research/Meta-Llama-3.1-8B-Instruct')
-
     train()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
