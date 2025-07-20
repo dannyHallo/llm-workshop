@@ -2,6 +2,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 from peft import PeftModel
 import os
+from utils import display_gpu_info
+
+display_gpu_info()
 
 model_id = "LLM-Research/Meta-Llama-3-8B-Instruct"
 model_path = os.path.join(os.path.expanduser('~'), '.cache', 'modelscope', 'hub', model_id)
