@@ -23,7 +23,7 @@ def process_func(example):
         "labels": labels
     }
 
-if __name__ == "__main__":
+def train():
     model = AutoModelForCausalLM.from_pretrained('./LLM-Research/Meta-Llama-3___1-8B-Instruct', device_map="auto",torch_dtype=torch.bfloat16)
     model.enable_input_require_grads() # 开启梯度检查点时，要执行该方法
     tokenizer = AutoTokenizer.from_pretrained('./LLM-Research/Meta-Llama-3___1-8B-Instruct', use_fast=False, trust_remote_code=True)
@@ -66,7 +66,8 @@ if __name__ == "__main__":
     # 在训练参数中设置了自动保存策略此处并不需要手动保存。
 
 
-
+if __name__ == "__main__":
+    train()
 
 
 
