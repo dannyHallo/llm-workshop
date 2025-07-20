@@ -26,7 +26,7 @@ def process_func(example):
 def train():
     # 1. Define the model identifier used by ModelScope
     # This should match the name you used in the 'modelscope download' command.
-    model_id = "LLM-Research/Meta-Llama-3___1-8B-Instruct"
+    model_id = "LLM-Research/Meta-Llama-3-8B-Instruct"
 
     # 2. Construct the full path to the model in the default ModelScope cache
     # os.path.expanduser('~') correctly resolves the '~' to your home directory.

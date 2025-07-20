@@ -40,6 +40,28 @@ pip install -r requirements.txt
 modelscope download --model LLM-Research/Meta-Llama-3-8B-Instruct
 ```
 
+
+- Download Claude Code
+
+<https://nodejs.org/en/download>
+
+```shell
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+# Download and install Node.js:
+nvm install 22
+# Verify the Node.js version:
+node -v # Should print "v22.17.1".
+nvm current # Should print "v22.17.1".
+# Verify npm version:
+npm -v # Should print "10.9.2".
+
+# npm install -g https://gaccode.com/claudecode/install --registry=https://registry.npmmirror.com
+npm install -g @anthropic-ai/claude-code
+```
+
 ## install pytorch
 
 - see cuda version
