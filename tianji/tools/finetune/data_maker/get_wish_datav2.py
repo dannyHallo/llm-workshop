@@ -17,19 +17,23 @@
 
 """
 
-import time
 import json
 import random
 import datetime
 from openai import OpenAI
 import os
-# OpenAI API配置
-openai_key = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=openai_key,base_url=os.getenv("OPENAI_API_BASE"))
+
+from dotenv import load_dotenv
+load_dotenv()
+
+api_key = os.getenv("OPENAI_API_KEY")
+base_url = os.getenv("OPENAI_API_BASE")
+client = OpenAI(api_key=api_key, base_url=base_url)
 
 def get_data_openai(content):
     response = client.chat.completions.create(
-        model="Qwen/Qwen2.5-72B-Instruct",
+        # model="Qwen/Qwen2.5-72B-Instruct",
+        model="deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
         messages=[
             {
                 "role": "system", 

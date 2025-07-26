@@ -4,9 +4,10 @@
 # https://platform.deepseek.com/docs
 
 import os
-from dotenv import load_dotenv
 
+from dotenv import load_dotenv
 load_dotenv()
+
 from openai import OpenAI
 
 api_key = os.getenv("OPENAI_API_KEY")
@@ -25,7 +26,7 @@ for model in client.models.list().data:
     print(model)
 
 response = client.chat.completions.create(
-    model="deepseek-chat",
+    model="deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
     messages=[
         {"role": "system", "content": "你是一个助手"},
         {"role": "user", "content": "你好"},

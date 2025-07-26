@@ -14,34 +14,23 @@ import time
 import json
 import random
 import datetime
-
-# zhipuai
-# 此处填写您自己的APIKey
-# zhipu_api_key = ""
-# client = ZhipuAI(api_key=zhipu_api_key)
-# def get_data_zhipu(content):
-#     response = client.chat.completions.create(
-#         model="glm-4",  # 填写需要调用的模型名称
-#         messages=[
-#             {"role": "system", "content": "你现在是一个精通言语表达、热爱他人、尊重长辈、富有文采的送祝福大师，请你编辑一条文本，表示对应场景的祝福语"},
-#             {"role": "user",
-#              "content": content,
-#              "temperature": 1} # 多样化输出
-#         ],
-#     )
-#     res = response.choices[0].message.content
-#     return res
-
-# deepseek
 from openai import OpenAI
+import os
+from dotenv import load_dotenv
 
-deepseek_key = ""  # 此处填写deepseek的key
-client = OpenAI(api_key=deepseek_key, base_url="https://api.deepseek.com/v1")
+load_dotenv()
+
+api_key = os.getenv("OPENAI_API_KEY")
+base_url = os.getenv("OPENAI_API_BASE")
+client = OpenAI(api_key=api_key, base_url=base_url)
 
 
 def get_data_ds(content):
     response = client.chat.completions.create(
-        model="deepseek-chat",
+        # model="deepseek-chat",
+        # model="Qwen/Qwen2.5-7B-Instruct",
+        # model="THUDM/GLM-4-9B-0414", # fastest
+        model="internlm/internlm2_5-7b-chat", # balances perf, speed, and is free
         messages=[
             {
                 "role": "system",
@@ -63,27 +52,27 @@ name_list = [
     "邻居赵大妈",
     "母亲",
     "姐姐",
-    "妹妹",
-    "哥哥",
-    "弟弟",
-    "爷爷",
-    "奶奶",
-    "外公",
-    "外婆",
-    "伯母",
-    "叔叔",
-    "阿姨",
-    "堂兄",
-    "堂妹",
-    "表哥",
-    "表妹",
-    "导师",
-    "同学",
-    "同事",
-    "领导",
-    "邻居",
-    "老板",
-    "医生",
+    # "妹妹",
+    # "哥哥",
+    # "弟弟",
+    # "爷爷",
+    # "奶奶",
+    # "外公",
+    # "外婆",
+    # "伯母",
+    # "叔叔",
+    # "阿姨",
+    # "堂兄",
+    # "堂妹",
+    # "表哥",
+    # "表妹",
+    # "导师",
+    # "同学",
+    # "同事",
+    # "领导",
+    # "邻居",
+    # "老板",
+    # "医生",
 ]
 
 # 可利用大模型补充对应场景 当前18种
@@ -93,19 +82,19 @@ scenes = [
     "元宵节",
     "端午节",
     "七夕节",
-    "中秋节",
-    "重阳节",
-    "除夕",
-    "腊八节",
-    "谈判顺利",
-    "乔迁新居",
-    "周年纪念",
-    "新婚快乐",
-    "家庭和睦",
-    "比赛取得好成绩",
-    "发财",
-    "工作升职 ",
-    "康复",
+    # "中秋节",
+    # "重阳节",
+    # "除夕",
+    # "腊八节",
+    # "谈判顺利",
+    # "乔迁新居",
+    # "周年纪念",
+    # "新婚快乐",
+    # "家庭和睦",
+    # "比赛取得好成绩",
+    # "发财",
+    # "工作升职 ",
+    # "康复",
 ]
 
 # 可利用大模型补充不同风格，加入更多 fewshot 造出更好的数据
@@ -144,7 +133,6 @@ final_prompt = """
 """
 
 if __name__ == "__main__":
-    # 在此处进行配置
     roop_count = 2  # 循环次数
     now_count = 0  # 当前生成数目
     stylename = "小红书"  # 风格名称：小红书、正常、严肃
@@ -170,10 +158,13 @@ if __name__ == "__main__":
                     )
 
                     response = get_data_ds(input_prompt)
+                    # print("raw response:", response)
                     now_count += 1
 
                     if "\n" in str(response):
-                        response = str(response).split("\n")[0]
+                        # response = str(response).split("\n")[0]
+                        response = response.replace("\n", " ")
+                        # print("split response:", response)
 
                     print(name, scene, "response:", response)
                     print("当前生成数目：", now_count)
@@ -203,6 +194,6 @@ if __name__ == "__main__":
                     continue
 
         now_time = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-        file_path = f"./wishes_{stylename}_{now_time}.json"
+        file_path = f"./our_dataset/wishes_{stylename}_{now_time}.json"
         with open(file_path, "w", encoding="utf8") as f:
             json.dump(conversations, f, ensure_ascii=False, indent=4)

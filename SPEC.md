@@ -1,5 +1,9 @@
 # 远程服务器初始化
 
+## 根 repo
+
+<https://github.com/datawhalechina/self-llm/>
+
 ## 环境概览
 
 - 远程 GPU 服务：[@AI Galaxy 控制台](https://gpu.ai-galaxy.cn/console/dashboard)  

@@ -47,5 +47,5 @@ def modify_json(json_file):
 
 
 # 使用该函数
-json_file_path = "/root/test/tianji-wishes-test.json"  # 你的 JSON 文件路径
+json_file_path = "./our_dataset/tianji-wishes-test.json"  # 你的 JSON 文件路径
 modify_json(json_file_path)

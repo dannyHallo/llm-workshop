@@ -18,6 +18,6 @@ def clean_short_len_data(json_file):
         json.dump(filtered_data, file, indent=4, ensure_ascii=False)
 
 
-output_file_path = "/root/test/tianji-wishes-test.json"
+output_file_path = "./our_dataset/tianji-wishes-test.json"
 
 clean_short_len_data(output_file_path)
