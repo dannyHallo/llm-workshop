@@ -23,9 +23,17 @@ pip install -r requirements.txt
 
 ---
 
-### 开始训练
+### 配置环境变量
+
+.env 文件的配置
+
+### 准备微调数据
+
+重点: `tools/finetune/data_maker` 和 `tools/finetune/datajson_refiner`
 
 - 使用 OpenAI API 制造数据
+
+<https://cloud.siliconflow.cn/>
 
 ```shell
 # 制造数据
