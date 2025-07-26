@@ -52,5 +52,5 @@ def add_holiday_greetings_to_input(json_file):
 
 
 # 使用该函数
-json_file_path = "/root/test/tianji-wishes-test.json"  # 你的 JSON 文件路径
+json_file_path = "./our_dataset/tianji-wishes-test.json"  # 你的 JSON 文件路径
 add_holiday_greetings_to_input(json_file_path)

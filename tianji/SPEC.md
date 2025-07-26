@@ -25,7 +25,7 @@ pip install -r requirements.txt
 
 ### 开始训练
 
-- 使用 API 制造数据
+- 使用 OpenAI API 制造数据
 
 ```shell
 # 制造数据
@@ -37,6 +37,10 @@ python tools/finetune/data_maker/merge_data_json.py -f ./our_dataset -o ./our_da
 # 清理数据
 ## 清理小于10个字符的数据
 python tools/finetune/datajson_refiner/remove_shot_len.py
+## input 后处理
+python tools/finetune/datajson_refiner/rebuild_input.py
 ## output 后处理
 python tools/finetune/datajson_refiner/rebuild_output.py
 ```
+
+- 最后的输出路径 `./our_dataset/tianji-wishes-test.json`
