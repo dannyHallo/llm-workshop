@@ -23,11 +23,13 @@
 - 使用 `web_demo.py` 测试提示词效果
 
 ### 2. 提示词验证与优化
+
 1. 使用上述工具进行提示词验证
 2. 进行多轮测试和优化
 3. 整理提示词模板库
 
 ### 3. 应用封装
+
 1. 参考 `tianji/prompt` 目录结构
 2. 实现提示词管理系统
 3. 开发Web界面（参考 `run/tianji_prompt_webui.py`）
@@ -35,6 +37,7 @@
 ## 二、构建RAG知识库应用
 
 ### 1. 数据收集
+
 1. 确定知识来源（网页、文档、专业书籍等）
 2. 使用 `tools/rag` 工具进行数据抓取：
    - 使用 `url2article.md` 抓取网页内容
@@ -42,6 +45,7 @@
 3. 进行初步数据清洗
 
 ### 2. 知识库构建
+
 1. 使用 `tools/rag` 工具进行数据过滤：
    - 使用 `0-data_llm_filter.py` 过滤低质量数据
    - 使用 `0-data_llm_filter_negative.py` 过滤负面样本
@@ -51,6 +55,7 @@
 4. 使用 `3-json2txt.py` 进行格式转换
 
 ### 3. 应用开发
+
 1. 参考 `tianji/knowledges` 目录结构
 2. 实现问答系统
 3. 优化答案生成质量
@@ -58,6 +63,7 @@
 ## 三、开发Agent应用
 
 ### 1. 角色设计
+
 1. 定义Agent的职责和能力
 2. 设计交互流程，可参考以下角色：
    - IntentReg: 意图识别
@@ -67,6 +73,7 @@
 3. 规划工具使用，可参考
 
 ### 2. 实现核心功能
+
 1. 参考 `tianji/agents` 目录结构
 2. 可参考实现以下组件：
    - 意图识别（参考 `test/agents/metagpt/intentReg_test_case.py`）
@@ -75,6 +82,7 @@
    - 搜索功能（参考 `test/agents/metagpt/searcher_test_case.py`）
 
 ### 3. 应用集成
+
 1. 实现Web界面
 2. 添加必要的API
 3. 进行功能测试
@@ -83,7 +91,7 @@
 
 1. 使用搜索功能需要配置相应的API密钥：
    - 在 .env 文件中配置 TAVILY_API_KEY
-   - 可以从 https://app.tavily.com/ 获取 API key
+   - 可以从 <https://app.tavily.com/> 获取 API key
 
 2. 开发过程中建议参考以下测试用例：
    - `test/agents/metagpt/test_metagpt_dummy.py`: 基本的Action和Role实现示例
