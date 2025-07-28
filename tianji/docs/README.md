@@ -1,1 +1,0 @@
-完整教程可查看当前文件夹文件，也可访问 <https://tianji.readthedocs.io/en/latest/index.html>

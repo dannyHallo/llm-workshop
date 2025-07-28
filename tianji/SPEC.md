@@ -1,5 +1,7 @@
 # 项目环境准备指南
 
+<https://tianji.readthedocs.io/en/latest/index.html>
+
 ---
 
 ## VS Code Remote-SSH 连接
